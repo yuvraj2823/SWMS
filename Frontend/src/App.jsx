@@ -1,43 +1,45 @@
 import React, { useState, useEffect } from "react";
 import './App.css';
 
-const WeatherBox = ({ time, weather }) => (
-  <div className="weather-box">
-    <h3>{time}</h3>
-    <p>{weather}</p>
+const WeatherDetail = ({ detail, value }) => (
+  <div className="weather-detail">
+    <h3>{detail}</h3>
+    <p>{value}</p>
   </div>
 );
 
-const TodayWeather = () => (
-  <div className="weather-grid">
-    <WeatherBox time="Morning" weather="Sunny, 25°C" />
-    <WeatherBox time="Afternoon" weather="Cloudy, 29°C" />
-    <WeatherBox time="Evening" weather="Windy, 22°C" />
-    <WeatherBox time="Overnight" weather="Clear, 19°C" />
-  </div>
-);
+const TimeWeatherDetails = ({ time }) => {
+  const weatherData = {
+    temperature: `${time} Temp: 25°C`,
+    humidity: `${time} Humidity: 60%`,
+    airPressure: `${time} Air Pressure: 1013 hPa`,
+    airQualityIndex: `${time} AQI: 45`,
+    uvRays: `${time} UV Rays: Moderate`
+  };
 
-const YesterdayWeather = () => (
-  <div className="weather-grid">
-    <WeatherBox time="Morning" weather="Cloudy, 24°C" />
-    <WeatherBox time="Afternoon" weather="Rainy, 27°C" />
-    <WeatherBox time="Evening" weather="Thunderstorm, 23°C" />
-    <WeatherBox time="Overnight" weather="Clear, 18°C" />
-  </div>
-);
+  return (
+    <div className="weather-grid">
+      <WeatherDetail detail="Temperature" value={weatherData.temperature} />
+      <WeatherDetail detail="Humidity" value={weatherData.humidity} />
+      <WeatherDetail detail="Air Pressure" value={weatherData.airPressure} />
+      <WeatherDetail detail="Air Quality Index" value={weatherData.airQualityIndex} />
+      <WeatherDetail detail="UV Rays" value={weatherData.uvRays} />
+    </div>
+  );
+};
 
 const PastTenDaysWeather = () => {
   const days = [
-    "Day 1: Avg. 24°C",
-    "Day 2: Avg. 22°C",
-    "Day 3: Avg. 26°C",
-    "Day 4: Avg. 27°C",
-    "Day 5: Avg. 23°C",
-    "Day 6: Avg. 25°C",
-    "Day 7: Avg. 26°C",
-    "Day 8: Avg. 21°C",
-    "Day 9: Avg. 28°C",
-    "Day 10: Avg. 27°C",
+    "Day 1: Avg Temp 24°C, Humidity 55%, AQI 50",
+    "Day 2: Avg Temp 22°C, Humidity 60%, AQI 45",
+    "Day 3: Avg Temp 26°C, Humidity 58%, AQI 52",
+    "Day 4: Avg Temp 27°C, Humidity 57%, AQI 47",
+    "Day 5: Avg Temp 23°C, Humidity 59%, AQI 49",
+    "Day 6: Avg Temp 25°C, Humidity 56%, AQI 53",
+    "Day 7: Avg Temp 26°C, Humidity 55%, AQI 48",
+    "Day 8: Avg Temp 21°C, Humidity 63%, AQI 42",
+    "Day 9: Avg Temp 28°C, Humidity 54%, AQI 51",
+    "Day 10: Avg Temp 27°C, Humidity 56%, AQI 50"
   ];
 
   return (
@@ -54,6 +56,7 @@ const PastTenDaysWeather = () => {
 const App = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [activeTab, setActiveTab] = useState("Today");
+  const [activeTime, setActiveTime] = useState("Morning");
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -66,13 +69,42 @@ const App = () => {
   const renderContent = () => {
     switch (activeTab) {
       case "Today":
-        return <TodayWeather />;
       case "Yesterday":
-        return <YesterdayWeather />;
+        return (
+          <div>
+            <div className="time-weather-grid">
+              <div
+                className={`weather-box ${activeTime === "Morning" ? "active" : ""}`}
+                onClick={() => setActiveTime("Morning")}
+              >
+                Morning
+              </div>
+              <div
+                className={`weather-box ${activeTime === "Afternoon" ? "active" : ""}`}
+                onClick={() => setActiveTime("Afternoon")}
+              >
+                Afternoon
+              </div>
+              <div
+                className={`weather-box ${activeTime === "Evening" ? "active" : ""}`}
+                onClick={() => setActiveTime("Evening")}
+              >
+                Evening
+              </div>
+              <div
+                className={`weather-box ${activeTime === "Overnight" ? "active" : ""}`}
+                onClick={() => setActiveTime("Overnight")}
+              >
+                Overnight
+              </div>
+            </div>
+            <TimeWeatherDetails time={activeTime} />
+          </div>
+        );
       case "Past 10 Days":
         return <PastTenDaysWeather />;
       default:
-        return <TodayWeather />;
+        return null;
     }
   };
 
@@ -81,7 +113,7 @@ const App = () => {
       <header className="header">
         <h1>Smart Weather Monitoring System</h1>
         <div className="time-location">
-          <div className="time">{currentTime.toLocaleTimeString()}</div>
+          <div className="time">Time - {currentTime.toLocaleTimeString()}</div>
           <button className="location-button">Location: Neemrana</button>
         </div>
       </header>
