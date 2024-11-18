@@ -1,0 +1,125 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e7f5f4 0%, #b2e1da 100%);
+    padding: 20px;
+  }
+  
+  .profile-card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 100%;
+    max-width: 500px;
+    animation: slideUp 0.5s ease-out;
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .profile-card h2 {
+    text-align: center;
+    color: #033e3e;
+    margin-bottom: 30px;
+    font-weight: 700;
+  }
+  
+  .profile-view, .profile-edit {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profile-field {
+    margin-bottom: 20px;
+  }
+  
+  .profile-field label {
+    display: block;
+    margin-bottom: 8px;
+    color: #2c8c99;
+    font-weight: 600;
+  }
+  
+  .profile-field p {
+    background-color: #f9f9f9;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+  }
+  
+  .profile-edit .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .profile-edit input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .profile-edit input:focus {
+    border-color: #2c8c99;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(44, 140, 153, 0.1);
+  }
+  
+  .profile-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .profile-actions button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+  }
+  
+  .edit-button, .save-button {
+    background-color: #033e3e;
+    color: white;
+  }
+  
+  .edit-button:hover, .save-button:hover {
+    background-color: #045252;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logout-button, .cancel-button {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .logout-button:hover, .cancel-button:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
